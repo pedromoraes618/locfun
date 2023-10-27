@@ -1,0 +1,154 @@
+/*celular*/
+@media screen and (max-width:1000px) {
+    .bloco .bloco-left {
+        display: none;
+    }
+
+    .bloco .bloco-left .categoria {
+        width: 100px;
+    }
+
+    .topo-container {
+        display: block;
+    }
+
+    .menu-container {
+        display: none;
+        position: absolute;
+        z-index: 2;
+    }
+}
+
+/*computador*/
+@media screen and (min-width:1000px) {
+    .topo-container {
+        display: none;
+    }
+}
+
+.alert {
+    animation: aparecer 1s ease-in-out forwards;
+    /* Aplicar a animação "aparecer" */
+    opacity: 0;
+    /* Iniciar com a opacidade 0 para a animação */
+}
+
+@keyframes aparecer {
+    from {
+        transform: translateY(100%);
+        /* Iniciar a partir do deslocamento máximo para baixo */
+        opacity: 0;
+        /* Iniciar com a opacidade 0 */
+    }
+
+    to {
+        transform: translateY(0);
+        /* Terminar sem deslocamento vertical (no topo) */
+        opacity: 1;
+        /* Terminar com opacidade total */
+    }
+}
+
+/*menu de acesso*/
+.menu-acess {
+    width: 280px;
+    height: 100vh
+}
+
+.menu-acess i {
+    margin-right: 6px;
+}
+
+/* Estilo para o contêiner pai */
+.bloco-inicial {
+    display: flex;
+    height: 100vh;
+}
+
+
+.navbar-toggler {
+    display: none;
+}
+
+.sub-menu-container {
+    flex: 2;
+
+    @media (max-width: 768px) {
+        flex: 12;
+
+    }
+}
+
+.table-container {
+    max-height: 600px;
+    overflow: auto;
+}
+
+.img-dashboard {
+    text-align: center;
+}
+
+.img-dashboard img {
+    height: 500px;
+}
+
+.menu-container ul li {
+    cursor: pointer;
+}
+
+.menu-container ul li ul {
+    display: block; /* Inicialmente, defina o submenu como visível */
+    opacity: 0; /* Configure a opacidade para 0 */
+    max-height: 0; /* Adicione esta linha para ocultar o conteúdo (altura máxima para 0) */
+    overflow: hidden; /* Ocultar o conteúdo que ultrapassa a altura máxima */
+    transition: opacity 0.8s, max-height 0.8s; /* Adicione uma transição de 0.8 segundos para suavizar a mudança de opacidade e altura máxima */
+}
+
+.menu-container ul li:hover ul {
+    opacity: 1; /* Quando você passar o mouse sobre o item pai, defina a opacidade para 1 */
+    max-height: 200px; /* Ajuste a altura máxima para o valor desejado para mostrar o submenu */
+}
+.menu-container ul ul {
+    list-style: none;
+    padding: 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+
+.menu-container ul ul {
+
+ 
+}
+
+.menu-container ul ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.menu-container ul li ul li {
+    background-color: rgb(84, 84, 84);
+    transition: all 0.2s ease-in-out;
+    padding: 5px 10px;
+    margin-left: 40px;
+
+}
+
+.menu-container ul li ul li:hover {
+    /* transform: translateX(10px); */
+}
+.menu-container ul li ul li a{
+    transition: 0.2s ease-in-out;
+}
+.menu-container ul li ul li a:hover{
+    color: #e0d903;
+
+}
+
+.upload-img {
+    width: 150px;
+    height: 100px;
+    background-size: cover;
+    background-position: center;
+}

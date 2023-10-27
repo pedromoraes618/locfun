@@ -1,0 +1,37 @@
+.bloco {
+    background-color: #024b61;
+}
+
+.waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: unset;
+
+}
+.alert{
+    animation: aparecer 1s ease-in-out forwards; /* Aplicar a animação "aparecer" */
+    opacity: 0; /* Iniciar com a opacidade 0 para a animação */
+}
+@keyframes aparecer {
+    from {
+        transform: translateY(100%); /* Iniciar a partir do deslocamento máximo para baixo */
+        opacity: 0; /* Iniciar com a opacidade 0 */
+    }
+    to {
+        transform: translateY(0); /* Terminar sem deslocamento vertical (no topo) */
+        opacity: 1; /* Terminar com opacidade total */
+    }
+}
+.reset{
+    text-align: right;
+}
+.reset a{
+    text-decoration: none;
+}
+.footer-modal{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 0px;
+}
