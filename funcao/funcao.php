@@ -1,7 +1,14 @@
 <?php
+date_default_timezone_set('America/Fortaleza');
+$data_inicial_date_time = date('Y-m-01 01:01:01');
+$data_final_date_time = date('Y-m-t 23:59:59');
+
+$data_inicial = date('Y-m-01');
 $data_inicial = date('Y-m-01');
 $data_final = date('Y-m-t');
 $data_movimento = date('Y-m-d');
+$datetime_atual = date('Y-m-d H:i:s'); // Formato: YYYY-MM-DD HH:MM:SS
+
 //consultar qualuer tabela do bd
 function consulta_tabela($conecta, $tabela, $coluna_filtro, $valor, $coluna_valor)
 {

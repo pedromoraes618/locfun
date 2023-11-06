@@ -38,6 +38,12 @@ if (isset($_GET['clt'])) {
 } elseif (isset($_GET['fpg'])) { //consulta forma de pagamento
     include "model/models/page/fpg.php";
     include "view/page/forma_pagamento/consulta_fpg.php";
+} elseif (isset($_GET['lcc'])) { //consulta locações
+    include "model/models/page/locacao.php";
+    include "view/page/locacao/consulta_locacao.php";
+} elseif (isset($_GET['addlcc']) or isset($_GET['editlcc'])) { //tela para  add e alterar locações
+    include "model/models/page/locacao.php";
+    include "view/page/locacao/tela_locacao.php";
 } else {
     include "model/models/page/clientes.php";
     include "view/page/dashboard/inicial.php";

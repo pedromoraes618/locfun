@@ -63,7 +63,7 @@
                 </ul>
             </li>
             <li>
-                <a href="?pg&alg" class="nav-link <?php if ($check == "alg") {
+                <a href="?pg&lcc" class="nav-link <?php if ($check == "lcc") {
                                                         echo 'active';
                                                     } else {
                                                         echo 'text-white';
@@ -71,6 +71,9 @@
                     <i class="bi bi-cart-dash-fill"></i>
                     Locações
                 </a>
+                <ul>
+                    <li><a href="?pg&lcc">Gerenciar Locações</a></li>
+                </ul>
             </li>
             <li>
                 <a href="?pg&conf" class="nav-link <?php if ($check == "user" or ($check == "conf") or ($check == "log")) {
@@ -79,7 +82,7 @@
                                                         echo 'text-white';
                                                     }  ?> text-white">
                     <i class="bi bi-people"></i>
-                    Configuracao
+                    Configuração
                 </a>
                 <ul>
                     <li><a href="?pg&user">Usuário</a></li>

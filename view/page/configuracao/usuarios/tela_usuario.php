@@ -27,9 +27,9 @@
 
         </div>
         <div class="row mb-2">
-            <div class="col-md  mb-2">
+            <div class="col-md-3 mb-2">
                 <label for="email" class="form-label">Grupo</label>
-                <select class="form-control" name="grupo" id="">
+                <select class="form-select" name="grupo" id="">
                     <option value="0">Selecione..</option>
                     <?php
                     $resultados = consulta_linhas_tb($conecta, 'grup_user');
@@ -44,9 +44,9 @@
                     ?>
                 </select>
             </div>
-            <div class="col-md  mb-2">
+            <div class="col-md-2  mb-2">
                 <label for="email" class="form-label">Ativo</label>
-                <select class="form-control" name="ativo" id="">
+                <select class="form-select" name="ativo" id="">
                     <option <?php if ($ativo == 1) {
                                 echo 'selected';
                             } ?> value="1">Sim</option>

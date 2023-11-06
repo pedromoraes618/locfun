@@ -24,6 +24,11 @@
     .topo-container {
         display: none;
     }
+    .bloco-inicial {
+        display: flex;
+        height: 100vh;
+    }
+    
 }
 
 .alert {
@@ -60,10 +65,6 @@
 }
 
 /* Estilo para o contêiner pai */
-.bloco-inicial {
-    display: flex;
-    height: 100vh;
-}
 
 
 .navbar-toggler {
@@ -102,6 +103,7 @@
     max-height: 0; /* Adicione esta linha para ocultar o conteúdo (altura máxima para 0) */
     overflow: hidden; /* Ocultar o conteúdo que ultrapassa a altura máxima */
     transition: opacity 0.8s, max-height 0.8s; /* Adicione uma transição de 0.8 segundos para suavizar a mudança de opacidade e altura máxima */
+    padding: 0px;
 }
 
 .menu-container ul li:hover ul {
@@ -151,4 +153,13 @@
     height: 100px;
     background-size: cover;
     background-position: center;
+}
+
+.select2{
+    width: 
+    100%;
+}
+
+.card-itens-loc{
+    max-height: 600px;
 }

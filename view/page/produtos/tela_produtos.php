@@ -34,7 +34,7 @@
             </div>
             <div class="col-md  mb-2">
                 <label for="categoria" class="form-label">Categoria</label>
-                <select class="form-control" name="categoria" id="categoria">
+                <select class="form-select" name="categoria" id="categoria">
                     <option value="0">Selecione</option>
                     <?php
                     $resultados = consulta_linhas_tb($conecta, 'categorias');
@@ -61,7 +61,7 @@
             </div>
             <div class="col-md-2  mb-2">
                 <label for="status" class="form-label">Status </label>
-                <select class="form-control" name="status" id="status">
+                <select class="form-select" name="status" id="status">
                     <option value="sn">Selecione..</option>
                     <option <?php if ($status == "1") {
                                 echo "selected";

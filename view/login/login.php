@@ -35,7 +35,7 @@ include "model/models/login/login.php"
                             <input type="hidden" name="form_login">
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control rounded-3" name="usuario" id="floatingUser" value="<?php echo $usuario; ?>" placeholder="Ex. claudio">
-                                <label for="floatingUser">Usúario</label>
+                                <label for="floatingUser">Usuário</label>
 
                             </div>
 

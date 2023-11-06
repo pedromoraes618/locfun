@@ -20,7 +20,10 @@ if (isset($_GET['clt'])) {
 } elseif (isset($_GET['lcf']) or isset($_GET['addlcf']) or isset($_GET['editlcf'])) {
     $check = 'lcf';
     $title = 'Financeiro';
-} elseif (isset($_GET['log'])) {
+}elseif (isset($_GET['lcc']) or isset($_GET['addlcc']) or isset($_GET['editlcc'])) {
+    $check = 'lcc';
+    $title = 'Locação';
+}  elseif (isset($_GET['log'])) {
     $check = 'log';
     $title = 'Log de sistema';
 } else {

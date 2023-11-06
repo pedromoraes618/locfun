@@ -24,7 +24,7 @@
         <div class="row mb-2">
             <div class="col-md-6  mb-2">
                 <label for="parceiro" class="form-label">Parceiro</label>
-                <select class="form-control" name="parceiro" id="parceiro">
+                <select class="form-select parceiro_select" name="parceiro" id="parceiro">
                     <option value="0">Selecione</option>
                     <?php
                     $resultados = consulta_linhas_tb($conecta, 'clientes');
@@ -42,7 +42,7 @@
             </div>
             <div class="col-md-2  mb-2">
                 <label for="status" class="form-label">Status</label>
-                <select class="form-control" name="status" id="status">
+                <select class="form-select" name="status" id="status">
                     <option value="0">Selecione</option>
                     <?php
                     $resultados = consulta_linhas_tb($conecta, 'status_financeiro');
@@ -59,7 +59,7 @@
             </div>
             <div class="col-md-2  mb-2">
                 <label for="forma_pg" class="form-label">Forma Pagamento</label>
-                <select class="form-control" name="forma_pg" id="forma_pg">
+                <select class="form-select" name="forma_pg" id="forma_pg">
                     <option value="0">Selecione</option>
                     <?php
                     $resultados = consulta_linhas_tb($conecta, 'forma_pg');
@@ -97,3 +97,5 @@
 
 
 </div>
+
+<script type="text/javascript" src="static/js/page/financeiro.js"></script>

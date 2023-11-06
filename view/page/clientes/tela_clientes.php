@@ -53,7 +53,7 @@
             </div>
             <div class="col-md-2  mb-2">
                 <label for="estado" class="form-label">Estado </label>
-                <select class="form-control" name="estado" id="estado">
+                <select class="form-select" name="estado" id="estado">
                     <option value="0">Selecione..</option>
                     <option <?php if ($estado == "MA") {
                                 echo "selected";
@@ -90,7 +90,7 @@
             </div>
             <div class="col-md-2  mb-2">
                 <label for="tipo_parceiro" class="form-label">Tipo</label>
-                <select class="form-control" name="tipo_parceiro" id="tipo_parceiro">
+                <select class="form-select" name="tipo_parceiro" id="tipo_parceiro">
                     <option value="0">Selecione..</option>
                     <option <?php if ($tipo_parceiro == "CLIENTE") {
                                 echo "selected";
@@ -104,7 +104,7 @@
         <div class="row mb-2">
             <div class="col-md-2  mb-2">
                 <label for="status" class="form-label">Status </label>
-                <select class="form-control" name="status" id="status">
+                <select class="form-select" name="status" id="status">
                     <option value="sn">Selecione..</option>
                     <option <?php if ($status == "1") {
                                 echo "selected";
@@ -122,4 +122,4 @@
     </form>
 </div>
 
-<script src="static/js/page/clientes.js"></script>
+<script type="text/javascript" src="static/js/page/clientes.js"></script>
