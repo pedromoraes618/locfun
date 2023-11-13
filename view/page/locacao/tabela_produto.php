@@ -27,14 +27,14 @@
                 $valor = $linha['valor'];
                 $total += $valor;
             ?>
-                <tr>
+                <tr class="tr_id<?php echo $codigo; ?>">
 
                     <td><?php echo $id_prod; ?></td>
                     <td><?php echo $descprd; ?></td>
                     <td><?php echo $qtd ?></td>
                     <td><?php echo real_format($valor) ?></td>
 
-                    <td><a href="?pg&removeitemloc&codigo=<?php echo $codigo; ?>" class="btn btn-sm btn-danger">Remover</a></td>
+                    <td><button id_prd='<?php echo $id_prod; ?>' id_item='<?php echo $codigo; ?>' class=" btn btn-sm btn-danger remover_item">Remover</button></td>
                 </tr>
 
             <?php

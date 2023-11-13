@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="col-md-auto d-grid gap-2 d-sm-block mb-1">
-                <a href="?pg&addprd" class="btn  btn-dark">Adicionar Produto</a>
+                <a href="?pg&addfpg" class="btn  btn-dark">Adicionar Forma Pagamento</a>
             </div>
         </div>
     </form>
@@ -32,28 +32,17 @@
                 <thead>
                     <tr>
                         <th>Código</th>
-                        <th>Img</th>
                         <th>Descrição</th>
-                        <th>Categoria</th>
-                        <th>Estoque</th>
-                        <th>Preço</th>
-                        <th>Ativo</th>
-                        <th></th>
+        
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     while ($linha = mysqli_fetch_assoc($consulta)) {
-                        $cod_produto = $linha['id_prod'];
-                        $produto = ($linha['produto']);
-                        $observacao = ($linha['observacao']);
-                        $qtd = ($linha['qtd']);
-                        $preco = real_format($linha['preco']);
-                        $ativo = ($linha['ativo']);
-                        $categoria = ($linha['categoria']);
-                        $img_produto = ($linha['img_produto']);
-
-
+                        $cod_fpg = $linha['id_pg'];
+                        $descricao = $linha['nome_pg'];
+                        $ativo = $linha['ativo'];
+                   
                         if ($ativo == 1) {
                             $ativo = "<span class='badge text-bg-success'>Sim</span>";
                         } else {
@@ -61,19 +50,13 @@
                         }
                     ?>
                         <tr>
-                            <td><?php echo $cod_produto; ?></td>
-                            <td><img width="40" height="40" class="rounded-5" src="<?php echo $img_produto; ?>"></td>
-                            <td><?php echo $produto; ?></td>
-                            <td><?php echo $categoria; ?></td>
-                            <td><?php echo $qtd; ?></td>
-                            <td><?php echo $preco; ?></td>
+                            <td><?php echo $cod_fpg; ?></td>
+                            <td><?php echo $descricao; ?></td>
                             <td><?php echo $ativo; ?></td>
-
+                   
                             <td style="width: 200px;">
-                                <a href="?pg&editprd&codigo=<?php echo $cod_produto; ?>" class="btn btn-sm btn-info">Editar</a>
-                                <a href="?pg&historprd&codigo=<?php echo $cod_produto; ?>" class="btn btn-sm btn-warning">Historico</a>
+                                <a href="?pg&editfpg&codigo=<?php echo $cod_fpg; ?>" class="btn btn-sm btn-info">Editar</a>
                             </td>
-
                         </tr>
                     <?php
                     }

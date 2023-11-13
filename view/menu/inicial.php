@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link rel="icon" type="img/icon.svg" href="img/icon.png">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    
 </head>
 
 <body>

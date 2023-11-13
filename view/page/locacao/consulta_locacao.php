@@ -13,8 +13,7 @@
 
             <div class="col-md  mb-2">
                 <div class="input-group">
-                    <input type="text" class="form-control" name="pesquisa_conteudo" value="<?php echo $conteudo_pesquisa; ?>" placeholder="Pesquise pelo
-                     nome do cliente" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" name="pesquisa_conteudo" value="<?php echo $conteudo_pesquisa; ?>" placeholder="Pesquise pelo nome do cliente" aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-outline-secondary" type="submit" id="pesquisar_filtro_pesquisa">Pesquisar</button>
                 </div>
             </div>
@@ -22,7 +21,7 @@
                 <a href="?pg&addlcc" class="btn  btn-dark">Adicionar Locação</a>
             </div>
         </div>
-        <div class="row mb-2">
+        <!-- <div class="row mb-2">
             <div class="col-md-2 mb-2">
                 <select name="status_lancamento" class="form-select" id="status_lancamento">
                     <option value="0">Status..</option>
@@ -47,7 +46,7 @@
 
                 </select>
             </div>
-        </div>
+        </div> -->
     </form>
     <div class="table-responsive">
         <table class="table  table-hover">
@@ -60,8 +59,11 @@
                         <th>Dt Locação</th>
                         <th>Dt Prevista</th>
                         <th>Cliente</th>
+                        <th></th>
                         <th>Valor</th>
                         <th></th>
+                        <th></th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +75,15 @@
                         $data_prevista = formatarTimeStamp($linha['data_prevista']);
                         $cliente = ($linha['cliente']);
                         $valor_liquido_loc = ($linha['valor_liquido_loc']);
+                        $status_loc = ($linha['status_loc']);
+                        if ($status_loc == "ABERTO") {
+                            $status = "<span class='badge text-bg-info'>Aberto</span>";
+                        } elseif ($status_loc == "FECHADO") {
+                            $status = "<span class='badge text-bg-success'>Fechado</span>";
+                        } else {
+                            $status = "<span class='badge text-bg-warning'>Aguardando Pagamento</span>";
+                        }
+
                         $total += $valor_liquido_loc;
 
                         // $ativo = $linha['ativo'];
@@ -89,8 +100,18 @@
                             <td><?php echo $data_loc; ?></td>
                             <td><?php echo $data_prevista; ?></td>
                             <td><?php echo $cliente; ?></td>
+                            <td><?php echo $status; ?></td>
                             <td><?php echo $valor_liquido_loc; ?></td>
-                            <td><a href="?pg&editlcf&codigo=<?php echo $codigo; ?>" class="btn btn-sm btn-info">Editar</a></td>
+                            <td class="btn-group">
+                                <a href="?pg&editlcc&codigo=<?php echo $codigo; ?>" class="btn btn-sm btn-info">Editar</a>
+                                <?php if ($status_loc != "FECHADO") {
+                                ?>
+                                    <a href="?pg&fechlcc&codigo=<?php echo $codigo; ?>" class="btn btn-sm btn-warning">Fechar</a>
+                                <?php
+                                } ?>
+                            </td>
+
+
                         </tr>
 
                     <?php
@@ -99,8 +120,9 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="4">Total</th>
+                        <th colspan="5">Total</th>
                         <th><?= real_format($total); ?></th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </tfoot>

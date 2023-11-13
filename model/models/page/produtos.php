@@ -18,7 +18,7 @@ if (isset($_GET['historprd'])) {
     $codigo = $_GET['codigo'];
 
     /*consultar o historico */
-    $select = "SELECT ajs.data_mov,ajs.id_mov,ajs.saida,ajs.entrada,ajs.preco_saida,ajs.preco_entrada,
+    $select = "SELECT ajs.id_prod, ajs.data_mov,ajs.id_mov,ajs.saida,ajs.entrada,ajs.preco_saida,ajs.preco_entrada,
 ajs.status,ajs.serie_doc,prd.nome as produto
  from ajuste_estoque as ajs inner join produtos as prd on prd.id_prod = ajs.id_prod WHERE ajs.id_prod = '$codigo' ";
     $consulta_historico = mysqli_query($conecta, $select);
@@ -28,6 +28,31 @@ ajs.status,ajs.serie_doc,prd.nome as produto
         die("erro na consulta:" . mysqli_error($conecta));
     }
 }
+if (isset($_POST['form_ajst'])) { //confirmar o ajuste de estoque
+    foreach ($_POST as $name => $value) { //define os valores das variaveis e os nomes com refencia do name do input no formulario
+        ${$name} = ($value);
+    }
+    $resultado_tb = consulta_linhas_tb($conecta, 'produtos');
+    if ($resultado_tb) {
+        foreach ($resultado_tb as $linha) {
+            $cod_produto = $linha['id_prod'];
+            $estoque = ($linha['qtd']);
+
+            if (isset($_POST["ajst$cod_produto"])) {
+                $novo_estoque = $_POST["ajst$cod_produto"];
+                if ($novo_estoque > 0) {
+                    if ($novo_estoque > $estoque) { //entrada
+                        adicionar_ajuste_estoque($conecta, "ENTRADA", $cod_produto, $novo_estoque);
+                    } else { //saida
+                        adicionar_ajuste_estoque($conecta, "SAIDA", $cod_produto, $novo_estoque);
+                    }
+                }
+            }
+        }
+    }
+    $alert_success = "Ajuste realizado com sucesso";
+}
+
 
 if (isset($_POST['pesquisa_conteudo'])) { //pesquisar por filtro
     $conteudo_pesquisa = $_POST['pesquisa_conteudo'];

@@ -45,7 +45,7 @@
                 </a>
                 <ul>
                     <li><a href="?pg&prd">Produtos</a></li>
-                    <li><a href="?pg&prd">Relatorio Geral</a></li>
+                    <li><a href="?pg&ajstest">Ajuste de Estoque</a></li>
                 </ul>
             </li>
             <li>
@@ -76,7 +76,7 @@
                 </ul>
             </li>
             <li>
-                <a href="?pg&conf" class="nav-link <?php if ($check == "user" or ($check == "conf") or ($check == "log")) {
+                <a href="?pg&conf" class="nav-link <?php if ($check == "user" or ($check == "conf") or ($check == "log") or ($check == "fpg")) {
                                                         echo 'active';
                                                     } else {
                                                         echo 'text-white';

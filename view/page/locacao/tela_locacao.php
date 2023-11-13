@@ -1,6 +1,8 @@
 <div class="p-3 shadow">
     <span class="badge mb-3 text-bg-dark"><?php echo $acao; ?> locação</span>
-    <?php if ($alert != "") { //alert para usuario corrigir
+    <span style="display: none;" class='alert alert_api' role='alert'></span>
+
+   <?php if ($alert != "") { //alert para usuario corrigir
         echo "<div class='alert alert-danger' role='alert'>$alert</div>";
     } ?>
     <?php if ($alert_success != "") { //alert acão realizada com sucesso
@@ -76,9 +78,10 @@
                                 foreach ($resultados as $linha) {
                                     $id_produto = $linha['id_prod'];
                                     $descricao_prd = $linha['nome'];
+                                    $estoque = $linha['qtd'];
                                     $preco = real_format($linha['preco']);
                                     $selected = ($id_produto == $prd_id) ? "selected" : "";
-                                    echo "<option value='$id_produto' $selected>$descricao_prd - $preco h </option>";
+                                    echo "<option value='$id_produto' $selected>$descricao_prd - $preco h / Estoque $estoque  </option>";
                                 }
                             }
                             ?>
@@ -93,7 +96,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-4  mb-2">
+                    <div class="col-md  mb-2">
                         <label for="addTaxa" class="form-label">Taxa</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">R$</span>
@@ -103,7 +106,7 @@
                     </div>
 
 
-                    <div class="col-md-4  mb-2">
+                    <div class="col-md  mb-2">
                         <label for="addDesconto" class="form-label">Desconto</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">R$</span>

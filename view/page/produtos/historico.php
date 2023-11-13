@@ -20,9 +20,13 @@
             </thead>
             <tbody>
                 <?php
+                $saldo = 0;
                 while ($linha = mysqli_fetch_assoc($consulta_historico)) {
+                    $id_prod = $linha['id_prod'];
+                    $estoque_atual = consulta_tabela($conecta, "produtos", "id_prod", $id_prod, "qtd");
+
                     $data_mov = formatDateB($linha['data_mov']);
-                    $produto = $linha['produto'];
+
                     $produto = $linha['produto'];
                     $id_mov = $linha['id_mov'];
                     $saida = $linha['saida'];
@@ -31,7 +35,8 @@
                     $preco_entrada = $linha['preco_entrada'];
                     $status = $linha['status'];
                     $serie_doc = $linha['serie_doc'];
-                    $saldo = $entrada - $saida;
+                    $saldo = $saldo + $entrada - $saida;
+
                     if ($status == "ok") {
                         $status = "<span class='badge text-bg-success' title='finalizado'><i class='bi bi-check2-circle'></i></span>";
                     } else {

@@ -170,3 +170,101 @@ function inserir_lancamento($conecta, $parceiro, $data_movimento, $dava_vencimen
         return false;
     }
 }
+
+function recalcula_valor_locacao($conecta, $codigo_loc)
+{
+    $valida_loc = consulta_tabela($conecta, "locacao", "codigo_loc", $codigo_loc, "id_loc");
+    if ($valida_loc != "") { //verificar se  existe a locação
+        $valor_itens_locacao =  consulta_tabela($conecta, "vlr_total_itens_locacao", "cod_locacao", $codigo_loc, "total");
+        $taxa_locacao =  consulta_tabela($conecta, "locacao", "codigo_loc", $codigo_loc, "taxa_loc");
+        $desconto_locacao =  consulta_tabela($conecta, "locacao", "codigo_loc", $codigo_loc, "desconto_loc");
+        $valor_liquido = $valor_itens_locacao + $taxa_locacao - $desconto_locacao;
+        $update = "UPDATE `locacao` SET `valor_liquido_loc` = '$valor_itens_locacao' WHERE `codigo_loc` =  '$codigo_loc' ";
+        $operacao_update = mysqli_query($conecta, $update);
+        if ($operacao_update) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return true;
+}
+
+function update_registro($conecta, $tabela, $filtro, $valor_filtro, $coluna_referencia, $valor_referencia)
+{
+
+    $update = "UPDATE $tabela SET $coluna_referencia = '$valor_referencia' WHERE $filtro =  '$valor_filtro' ";
+    $operacao_update = mysqli_query($conecta, $update);
+    if ($operacao_update) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function atualiza_ajuste_estoque($conecta, $operacao, $codigo_loc)
+{ //refernte a locação
+    global $data_movimento;
+    $select = "SELECT * FROM itens_locados where cod_locacao = '$codigo_loc'";
+    $consulta = mysqli_query($conecta, $select);
+    while ($linha = mysqli_fetch_assoc($consulta)) {
+        $id_item = $linha['id_item'];
+        $id_prod = $linha['id_prod'];
+        $qtd = $linha['qtd'];
+        $valor = $linha['valor'];
+        $estoque_atual = consulta_tabela($conecta, "produtos", "id_prod", $id_prod, "qtd");
+
+        if ($operacao == "SAIDA") { //PRODUTO SAIU
+            $novo_estoque = $estoque_atual - $qtd;
+            $insert = "INSERT INTO `ajuste_estoque` ( `data_mov`,
+             `id_prod`, `id_mov`, `saida`, `entrada`, `preco_saida`,
+              `preco_entrada`, `status`, `serie_doc`) VALUES 
+              ( '$data_movimento', '$id_prod', '$id_item', '$qtd', '0', '$valor', '0', 'ok', 'loc')";
+
+            $update_estoque = update_registro($conecta, "produtos", 'id_prod', $id_prod, 'qtd', $novo_estoque);
+        } else { //retorno
+            $novo_estoque = $estoque_atual + $qtd;
+            $insert = "INSERT INTO `ajuste_estoque` ( `data_mov`,
+            `id_prod`, `id_mov`, `saida`, `entrada`, `preco_saida`,
+             `preco_entrada`, `status`, `serie_doc`) VALUES 
+             ( '$data_movimento', '$id_prod', '$id_item', '0', '$qtd', '0', '0', 'ok', 'loc')";
+            $update_estoque = update_registro($conecta, "produtos", 'id_prod', $id_prod, 'qtd', $novo_estoque);
+        }
+        $operacao_insert = mysqli_query($conecta, $insert);
+        if ($operacao_insert and $update_estoque) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+function adicionar_ajuste_estoque($conecta, $operacao, $id_prod, $novo_estoque)
+{ //refernte ao ajuste avulsos
+
+    global $data_movimento;
+    $estoque_atual = consulta_tabela($conecta, "produtos", "id_prod", $id_prod, "qtd");
+
+    if ($operacao == "SAIDA") { //PRODUTO SAIU
+        $diferencia_estoque = $estoque_atual - $novo_estoque ;
+        $insert = "INSERT INTO `ajuste_estoque` ( `data_mov`,
+             `id_prod`, `id_mov`, `saida`, `entrada`, `preco_saida`,
+              `preco_entrada`, `status`, `serie_doc`) VALUES 
+              ( '$data_movimento', '$id_prod', '0', '$diferencia_estoque', '0', '0', '0', 'ok', 'ajst')";
+
+        $update_estoque = update_registro($conecta, "produtos", 'id_prod', $id_prod, 'qtd', $novo_estoque);
+    } else { //retorno
+        $diferencia_estoque = $novo_estoque - $estoque_atual;
+        $insert = "INSERT INTO `ajuste_estoque` ( `data_mov`,
+            `id_prod`, `id_mov`, `saida`, `entrada`, `preco_saida`,
+             `preco_entrada`, `status`, `serie_doc`) VALUES 
+             ( '$data_movimento', '$id_prod', '0', '0', '$diferencia_estoque', '0', '0', 'ok', 'ajst')";
+        $update_estoque = update_registro($conecta, "produtos", 'id_prod', $id_prod, 'qtd', $novo_estoque);
+    }
+    $operacao_insert = mysqli_query($conecta, $insert);
+    if ($operacao_insert and $update_estoque) {
+        return true;
+    } else {
+        return false;
+    }
+}

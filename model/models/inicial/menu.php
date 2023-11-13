@@ -2,7 +2,7 @@
 if (isset($_GET['clt'])) {
     $check = 'clt'; //defiinir o check no menu 
     $title = 'Clientes'; //defiinir o titulo
-} elseif (isset($_GET['prd'])) {
+} elseif (isset($_GET['prd']) or isset($_GET['ajstest'])) {
     $check = 'prd';
     $title = 'Produtos';
 } elseif (isset($_GET['user']) or isset($_GET['edituser']) or isset($_GET['adduser']) or isset($_GET['resetuser'])) {
@@ -16,16 +16,19 @@ if (isset($_GET['clt'])) {
     $title = 'Alguel';
 } elseif (isset($_GET['alg']) or isset($_GET['editprd']) or isset($_GET['addprd']) or isset($_GET['historprd'])) {
     $check = 'prd';
-    $title = 'histórico';
+    $title = 'Histórico';
 } elseif (isset($_GET['lcf']) or isset($_GET['addlcf']) or isset($_GET['editlcf'])) {
     $check = 'lcf';
     $title = 'Financeiro';
-}elseif (isset($_GET['lcc']) or isset($_GET['addlcc']) or isset($_GET['editlcc'])) {
+} elseif (isset($_GET['lcc']) or isset($_GET['addlcc']) or isset($_GET['editlcc']) or isset($_GET['fechlcc'])) {
     $check = 'lcc';
     $title = 'Locação';
-}  elseif (isset($_GET['log'])) {
+} elseif (isset($_GET['log'])) {
     $check = 'log';
     $title = 'Log de sistema';
+}elseif (isset($_GET['fpg']) or isset($_GET['addfpg']) or isset($_GET['editfpg']) ) {
+    $check = 'fpg';
+    $title = 'Forma Pagamento';
 } else {
     $check = false;
     $title = "Inicial";
