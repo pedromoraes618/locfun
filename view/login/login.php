@@ -1,6 +1,3 @@
-<?php
-include "model/models/login/login.php"
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -50,7 +47,7 @@ include "model/models/login/login.php"
 
 
                             <div class="reset">
-                                <small class="text-muted"><a href="?reset_password">Resetar renha</a></small>
+                                <small class="text-muted"><a href="?rspw">Resetar renha</a></small>
                             </div>
 
                             <div class="footer-modal">

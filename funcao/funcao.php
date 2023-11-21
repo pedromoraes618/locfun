@@ -162,7 +162,7 @@ function real_format($valor)
 function inserir_lancamento($conecta, $parceiro, $data_movimento, $dava_vencimento, $data_pagmento, $status, $forma_pagamento, $descricao, $valor, $operacao, $doc)
 {
     $insert = "INSERT INTO `financeiro` ( `id_pg`, `id_cliente`, `valor`, `id_operacao`, `descricao`, `data_operacao`, `data_vencimento`, `data_pagamento`,
-     `id_status`, `doc`) VALUES ( '$forma_pagamento', '$parceiro', '$valor', '1', '$descricao', '$data_movimento', '$dava_vencimento', '$data_pagmento', '$status', '$doc' )";
+     `id_status`, `doc`) VALUES ( '$forma_pagamento', '$parceiro', '$valor', '$operacao', '$descricao', '$data_movimento', '$dava_vencimento', '$data_pagmento', '$status', '$doc' )";
     $operacao_insert = mysqli_query($conecta, $insert);
     if ($operacao_insert) {
         return true;
@@ -232,11 +232,12 @@ function atualiza_ajuste_estoque($conecta, $operacao, $codigo_loc)
             $update_estoque = update_registro($conecta, "produtos", 'id_prod', $id_prod, 'qtd', $novo_estoque);
         }
         $operacao_insert = mysqli_query($conecta, $insert);
-        if ($operacao_insert and $update_estoque) {
-            return true;
-        } else {
-            return false;
-        }
+    }
+    
+    if ($operacao_insert and $update_estoque) {
+        return true;
+    } else {
+        return false;
     }
 }
 function adicionar_ajuste_estoque($conecta, $operacao, $id_prod, $novo_estoque)

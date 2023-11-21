@@ -56,10 +56,12 @@
 
 /*menu de acesso*/
 .menu-acess {
-    width: 280px;
+    width: 220px;
     height: 100vh
 }
-
+.menu-acess .nav{
+    display: block;
+}
 .menu-acess i {
     margin-right: 6px;
 }
@@ -99,17 +101,12 @@
 
 .menu-container ul li ul {
     display: block; /* Inicialmente, defina o submenu como visível */
-    opacity: 0; /* Configure a opacidade para 0 */
-    max-height: 0; /* Adicione esta linha para ocultar o conteúdo (altura máxima para 0) */
-    overflow: hidden; /* Ocultar o conteúdo que ultrapassa a altura máxima */
+ 
     transition: opacity 0.8s, max-height 0.8s; /* Adicione uma transição de 0.8 segundos para suavizar a mudança de opacidade e altura máxima */
-    padding: 0px;
+    padding: 5px;
 }
 
-.menu-container ul li:hover ul {
-    opacity: 1; /* Quando você passar o mouse sobre o item pai, defina a opacidade para 1 */
-    max-height: 200px; /* Ajuste a altura máxima para o valor desejado para mostrar o submenu */
-}
+
 .menu-container ul ul {
     list-style: none;
     padding: 5px;
@@ -120,7 +117,7 @@
 
 .menu-container ul ul {
 
- 
+    background-color: rgb(65, 65, 65);
 }
 
 .menu-container ul ul li a {
@@ -130,13 +127,14 @@
 }
 
 .menu-container ul li ul li {
-    background-color: rgb(84, 84, 84);
-    transition: all 0.2s ease-in-out;
-    padding: 5px 10px;
-    margin-left: 40px;
+    
+    padding: 3px 5px;
+}
+.menu-container ul li ul li:hover{
+    border-left: 3px solid white;
+    transition: all 0.3s ease-in-out;
 
 }
-
 .menu-container ul li ul li:hover {
     /* transform: translateX(10px); */
 }

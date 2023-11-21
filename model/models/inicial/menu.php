@@ -17,16 +17,16 @@ if (isset($_GET['clt'])) {
 } elseif (isset($_GET['alg']) or isset($_GET['editprd']) or isset($_GET['addprd']) or isset($_GET['historprd'])) {
     $check = 'prd';
     $title = 'Histórico';
-} elseif (isset($_GET['lcf']) or isset($_GET['addlcf']) or isset($_GET['editlcf'])) {
+} elseif (isset($_GET['lcf']) or isset($_GET['addlcf']) or isset($_GET['editlcf']) or isset($_GET['rpgtrec'])) {
     $check = 'lcf';
     $title = 'Financeiro';
-} elseif (isset($_GET['lcc']) or isset($_GET['addlcc']) or isset($_GET['editlcc']) or isset($_GET['fechlcc'])) {
+} elseif (isset($_GET['lcc']) or isset($_GET['addlcc']) or isset($_GET['editlcc']) or isset($_GET['fechlcc']) ) {
     $check = 'lcc';
     $title = 'Locação';
 } elseif (isset($_GET['log'])) {
     $check = 'log';
     $title = 'Log de sistema';
-}elseif (isset($_GET['fpg']) or isset($_GET['addfpg']) or isset($_GET['editfpg']) ) {
+} elseif (isset($_GET['fpg']) or isset($_GET['addfpg']) or isset($_GET['editfpg'])) {
     $check = 'fpg';
     $title = 'Forma Pagamento';
 } else {

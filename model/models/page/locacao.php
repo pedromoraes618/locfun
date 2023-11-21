@@ -25,7 +25,34 @@ $prd_id = null;
 $observacao = null;
 $qtd = 1;
 
+if (isset($_POST['pesquisa_conteudo_rlt'])) {
+    $conteudo_pesquisa = $_POST['pesquisa_conteudo'];
+    $data_inicial = $_POST['data_inicial'];
+    $data_final = $_POST['data_final'];
 
+    $select = "SELECT sum(valor_liquido_loc) as vlrtotalloc,count(*) as qtdloc from locacao where data_loc between '$data_inicial  01:01:01' and '$data_final 23:59:59' ";
+    $consulta_relatorio_loc = mysqli_query($conecta, $select);
+    $linha = mysqli_fetch_assoc($consulta_relatorio_loc);
+    $valor_total_loc = $linha['vlrtotalloc'];
+    $qtd_loc = $linha['qtdloc'];
+} else {
+    $select = "SELECT sum(valor_liquido_loc) as vlrtotalloc,count(*) as qtdloc from locacao where data_loc between '$data_inicial  01:01:01' and '$data_final 23:59:59' ";
+    $consulta_relatorio_loc = mysqli_query($conecta, $select);
+    $linha = mysqli_fetch_assoc($consulta_relatorio_loc);
+    $valor_total_loc = $linha['vlrtotalloc'];
+    $qtd_loc = $linha['qtdloc'];
+}
+function valor_consulta_historico_loc($i, $ano)
+{ //função para verifiar o historico de locações
+    global $conecta;
+    $ultimo_dia_mes = date('t');
+    $select = "SELECT sum(valor_liquido_loc) as vlrtotalloc,count(*) as qtdloc from locacao where data_loc between '$ano-$i-01  01:01:01' and '$ano-$i-$ultimo_dia_mes  23:59:59' ";
+    $consulta_relatorio_loc = mysqli_query($conecta, $select);
+    $linha = mysqli_fetch_assoc($consulta_relatorio_loc);
+    $valor_total_loc = $linha['vlrtotalloc'];
+    $qtd_loc = $linha['qtdloc'];
+    return array('valor_total_loc' => $valor_total_loc, 'qtd_loc' => $qtd_loc);
+}
 
 if (isset($_POST['pesquisa_conteudo'])) { //pesquisar
     $conteudo_pesquisa = $_POST['pesquisa_conteudo'];
@@ -126,8 +153,9 @@ if (isset($_POST['form_locacao'])) {
               ( '$codigo_loc', '$data_locacao', '$user_id', '$parceiro', '$data_prevista', '$data_retorno', '$valor_itens','$valor_loc', '$desconto', '$taxa', '$forma_pg', 
               '0', '$status_loc', '$observacao')";
             $operacao_insert = mysqli_query($conecta, $insert);
+            $locacao_new = mysqli_insert_id($conecta);
+
             if ($operacao_insert and atualiza_ajuste_estoque($conecta, 'SAIDA', $codigo_loc)) {
-                $locacao_new = mysqli_insert_id($conecta);
                 $alert_success = "Locação $locacao_new incluida com sucesso";
                 $acao_log = ("Usuário $usuario_logado incluiu a locação $locacao_new  ");
                 registrar_log($conecta, $usuario_logado, $acao_log);
@@ -175,6 +203,7 @@ if (isset($_POST['form_locacao'])) {
         }
     } else { //concluir locação
 
+        $loc_id = consulta_tabela($conecta, 'locacao', 'codigo_loc', $codigo_loc, 'id_loc'); //verificar o status da cotação
         $status_locacao = consulta_tabela($conecta, 'locacao', 'codigo_loc', $codigo_loc, 'status_loc'); //verificar o status da cotação
         $status_pagamento = consulta_tabela($conecta, 'locacao', 'codigo_loc', $codigo_loc, 'pg_efetuado'); //verificar o status do pagamento
         $id_cliente = consulta_tabela($conecta, 'locacao', 'codigo_loc', $codigo_loc, 'id_cliente'); //coletar o id do cliente 
@@ -198,7 +227,7 @@ if (isset($_POST['form_locacao'])) {
                     $valor_pagamento = $_POST["pgt$id"]; //coletar o valor da forma de pagamento
                     if ($valor_pagamento > 0) {
                         $valor_total_pagamento += $valor_pagamento;
-                        inserir_lancamento($conecta, $id_cliente, $data_movimento, $data_movimento, $data_movimento, '2', $id, 'Pagamento referente a loc', $valor_pagamento, '1', "loc"); //inserir o pagamento no financeiro
+                        inserir_lancamento($conecta, $id_cliente, $data_movimento, $data_movimento, $data_movimento, '2', $id, "Pagamento referente a loc $loc_id", $valor_pagamento, $loc_id, "loc"); //inserir o pagamento no financeiro
                     }
                 }
             }

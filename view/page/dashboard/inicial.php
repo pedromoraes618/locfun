@@ -74,7 +74,7 @@
     <div class="col-md-6">
         <div id="card-top-1-1" class="card  border-0 Regular shadow">
             <div id="card_receita" class="card-header text-bg-dark">
-                locações Em aberto <?php echo $qtd_consulta_locacao; ?>
+                locações em Aberto <?php echo $qtd_consulta_locacao; ?>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -84,11 +84,9 @@
                         ?>
                             <thead>
                                 <tr>
-                                    <th>Código</th>
                                     <th>Dt Locação</th>
                                     <th>Dt Prevista</th>
                                     <th>Cliente</th>
-                                    <th></th>
                                     <th>Valor</th>
                              
 
@@ -124,12 +122,10 @@
                                 ?>
                                     <tr>
 
-                                        <td><?php echo $codigo; ?></td>
                                         <td><?php echo $data_loc; ?></td>
                                         <td><?php echo $data_prevista; ?></td>
                                         <td><?php echo $cliente; ?></td>
-                                        <td><?php echo $status; ?></td>
-                                        <td><?php echo $valor_liquido_loc; ?></td>
+                                        <td><?php echo real_format($valor_liquido_loc); ?></td>
                                     </tr>
 
                                 <?php
@@ -138,7 +134,7 @@
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <th colspan="5">Total</th>
+                                    <th colspan="3">Total</th>
                                     <th><?= real_format($total); ?></th>
                            
                                 </tr>
@@ -155,7 +151,7 @@
     <div class="col-md-6">
         <div id="card-top-1-1" class="card  border-0 Regular shadow">
             <div id="card_receita" class="card-header text-bg-dark">
-                Financeiro a quitar <?php echo $qtd_consulta_financeiro; ?>
+                Financeiro a Quitar <?php echo $qtd_consulta_financeiro; ?>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -176,7 +172,6 @@
                                 <?php
                                 $total = 0;
                                 while ($linha = mysqli_fetch_assoc($consulta_financeiro)) {
-                                    $codigo = ($linha['id_fin']);
                                     $data_pagamento = formatDateB($linha['data_pagamento']);
                                     $data_vencimento = formatDateB($linha['data_vencimento']);
                                     $tipo_operacao = ($linha['tipo_operacao']);

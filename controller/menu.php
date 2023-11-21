@@ -32,9 +32,12 @@ if (isset($_GET['clt'])) {
 } elseif (isset($_GET['lcf'])) { //consulta financeiro
     include "model/models/page/financeiro.php";
     include "view/page/financeiro/consulta_financeiro.php";
-} elseif (isset($_GET['addlcf']) or isset($_GET['editlcf'])) { //tela para  add e alterar financeiro
+} elseif (isset($_GET['addlcf']) or isset($_GET['editlcf'])) { //tela para  add e alterar  financeiro
     include "model/models/page/financeiro.php";
     include "view/page/financeiro/tela_financeiro.php";
+} elseif (isset($_GET['rpgtrec'])) { // relatorio financeiro
+    include "model/models/page/financeiro.php";
+    include "view/page/financeiro/pagamento_recebimento.php";
 } elseif (isset($_GET['log'])) { //consulta log
     include "model/models/page/log.php";
     include "view/page/configuracao/log_sistema/consulta_log.php";
@@ -50,6 +53,9 @@ if (isset($_GET['clt'])) {
 } elseif (isset($_GET['addlcc']) or isset($_GET['editlcc'])) { //tela para  add e alterar locações
     include "model/models/page/locacao.php";
     include "view/page/locacao/tela_locacao.php";
+} elseif (isset($_GET['rloc'])) { //tela para  add e alterar locações
+    include "model/models/page/locacao.php";
+    include "view/page/locacao/relatorio_locacoes.php";
 } elseif (isset($_GET['fechlcc'])) { //tela para  concluir locação
     include "model/models/page/locacao.php";
     include "view/page/locacao/tela_fechar_locacao.php";
